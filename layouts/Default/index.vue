@@ -4,6 +4,7 @@
     <div class="position-relative h-100">
       <navbar />
       <div class="app-page px-4 pb-4" :class="{ 'l2-menu-show': l2MenuVisible }">
+        <license-status class="licenseStatus" v-if="$appConfig.isPrivate" />
         <slot />
       </div>
     </div>
@@ -16,6 +17,7 @@ import Navbar from '@scope/layouts/Navbar'
 import Sidebar from '../Sidebar'
 import SidePageManager from '@/sections/SidePageManager'
 import notificationListener from '@/utils/notificationListener'
+import LicenseStatus from '@/sections/LicenseStatus'
 
 export default {
   name: 'DefaultLayout',
@@ -23,6 +25,7 @@ export default {
     Sidebar,
     Navbar,
     SidePageManager,
+    LicenseStatus,
   },
   data () {
     return {

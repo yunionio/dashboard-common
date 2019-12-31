@@ -97,6 +97,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    filterHandle: {
+      type: Function,
+    },
     initLoaded: Boolean, // 首次加载完成
   },
   data () {
@@ -227,6 +230,9 @@ export default {
       }
       manager.list({ params, ctx: this.ctx })
         .then(({ data: { data = [] } }) => {
+          if (this.filterHandle) {
+            data = data.filter(val => this.filterHandle(val))
+          }
           let list = data.map(val => ({ ...val, id: val[this.idKey], name: val[this.nameKey] }))
           if (this.mapper) {
             list = this.mapper(list)

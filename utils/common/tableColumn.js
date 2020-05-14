@@ -5,6 +5,7 @@ import BrandIcon from '@/sections/BrandIcon'
 import TagTableColumn from '@/sections/TagTableColumn'
 import store from '@/store'
 import i18n from '@/locales'
+import { hasPermission } from '@/utils/auth'
 
 export const getProjectTableColumn = ({ field = 'tenant', title = i18n.t('dictionary.project'), projectsItem = 'tenant', sortable = true, hidden = false, minWidth = 100 } = {}) => {
   return {
@@ -526,7 +527,11 @@ export const getBillingTableColumn = ({
           const time = vm.$moment(row.expired_at).format()
           let tooltipCon = <div slot="help"></div>
           if (billingType === 'postpaid') {
-            tooltipCon = <div slot="help">虚拟机会在 { time } 释放，<span class="link-color" style="cursor: pointer" onClick={openVmSetDurationDialog}>去设置</span></div>
+            if (hasPermission('server_perform_cancel_expire')) {
+              tooltipCon = <div slot="help">虚拟机会在 { time } 释放，<span class="link-color" style="cursor: pointer" onClick={ openVmSetDurationDialog }>去设置</span></div>
+            } else {
+              tooltipCon = <div slot="help">虚拟机会在 { time } 释放</div>
+            }
           } else if (billingType === 'prepaid') {
             if (row.auto_renew) {
               tooltipCon = <div slot="help">虚拟机会在 { time } 释放，到期自动续费</div>

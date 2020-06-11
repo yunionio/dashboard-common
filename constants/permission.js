@@ -618,6 +618,20 @@ export const PERMISSION = {
   scheduledtasks_perform_enable: ['compute', 'scheduledtasks', 'perform', 'enable'],
   scheduledtasks_perform_disable: ['compute', 'scheduledtasks', 'perform', 'disable'],
   scheduledtasks_perform_set_label: ['compute', 'scheduledtasks', 'perform', 'set-labels'],
+  // 权限组
+  cloudgroup_create: ['cloudid', 'cloudgroups', 'create'],
+  cloudgroup_list: ['cloudid', 'cloudgroups', 'list'],
+  cloudgroup_get: ['cloudid', 'cloudgroups', 'get'],
+  cloudgroup_perform_add_user: ['cloudid', 'cloudgroups', 'perform', 'set-users'],
+  cloudgroup_perform_set_policy: ['cloudid', 'cloudgroups', 'perform', 'set-policies'],
+  cloudgroup_delete: ['cloudid', 'cloudgroups', 'delete'],
+  cloudgroup_perform_remove_user: ['cloudid', 'cloudgroups', 'perform', 'remove-user'],
+  cloudgroup_perform_syncstatus: ['cloudid', 'cloudgroups', 'perform', 'syncstatus'],
+  // 云用户
+  clouduser_perform_leave_group: ['cloudid', 'cloudusers', 'perform', 'leave-group'],
+  // 云权限
+  cloudpolicy_list: ['cloudid', 'cloudpolicies', 'list'],
+  cloudpolicy_perform_revoke_group: ['cloudid', 'cloudpolicies', 'perform', 'revoke-group'],
 }
 
 // 已声明权限的资源

@@ -38,30 +38,32 @@ export default {
     },
   },
   data () {
+    const filterOptions = {
+      obj_name: {
+        label: '资源名称',
+      },
+      tenant: {
+        label: `所属${this.$t('dictionary.project')}`,
+      },
+      user: {
+        label: '发起人',
+        filter: true,
+        formatter: val => {
+          return `user.contains("${val}")`
+        },
+      },
+      action: {
+        label: '操作',
+      },
+    }
+    if (this.$store.getters.isProjectMode) delete filterOptions.tenant
     return {
       rangeTime: [null, null],
       list: this.$list.createList(this, {
         resource: 'actions',
         apiVersion: 'v1',
         getParams: this.getParam,
-        filterOptions: {
-          obj_name: {
-            label: '资源名称',
-          },
-          tenant: {
-            label: `所属${this.$t('dictionary.project')}`,
-          },
-          user: {
-            label: '发起人',
-            filter: true,
-            formatter: val => {
-              return `user.contains("${val}")`
-            },
-          },
-          action: {
-            label: '操作',
-          },
-        },
+        filterOptions,
       }),
       exportDataOptions: {
         items: [

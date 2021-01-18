@@ -1,3 +1,4 @@
+import iam from './iam'
 import NotFoundPage from '@/views/exception/404'
 import NoPermission from '@/views/exception/403'
 import EmailVerify from '@/views/email-verify'
@@ -8,6 +9,7 @@ import Clouduser from '@/views/clouduser'
 import WorkflowSuccess from '@/views/workflow/success'
 import WorkflowError from '@/views/workflow/error'
 
+const commonRoutes = [iam]
 export const menusConfig = getModulesRouteConfig()
 
 const routes = [
@@ -54,6 +56,9 @@ function getScopeRoutes () {
 function getModulesRouteConfig () {
   const isPrivate = process.env.VUE_APP_IS_PRIVATE
   let ret = []
+  // load src commom routes
+  ret.push(...commonRoutes)
+  // load scope & containers routes
   const r = isPrivate ? require.context('../../scope', true, /.\/router\/index.js/) : require.context('../../containers', true, /^((?![\\/]node_modules).)*.\/router\/index.js$/)
   r.keys().forEach(dir => {
     ret = ret.concat(r(dir).default)
